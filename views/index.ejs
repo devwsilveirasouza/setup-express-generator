@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <h1><%= title %></h1>
+
+    <!-- Formulário para Adicionar Cliente -->
+    <h3>Add Customer</h3>
+    <form action="/save" method="post">
+        <p>
+            <label>Name:</label>
+            <input type="text" name="name" required>
+        </p>
+        <p>
+            <label>Age:</label>
+            <input type="number" name="age" required>
+        </p>
+        <p>
+            <button type="submit">Save</button>
+        </p>
+    </form>
+
+    <!-- Lista de Clientes -->
+    <h3>Customer List</h3>
+    <ul>
+        <% customers.forEach((customer) => { %>
+            <li>
+                <%= customer.name %> (<%= customer.age %>) 
+                <form action="/delete/<%= customer.id %>" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
