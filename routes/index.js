@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const requireAuth = require('../middleware/auth');
 const db = require('../database');
+
+router.get('/dashboard', requireAuth, (req, res) => {
+  res.render('dashboard');
+});
 
 // Rota para listar clientes
 router.get('/', (req, res) => {

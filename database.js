@@ -9,6 +9,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
   } else {
     console.log('Connected to SQLite database');
 
+    // Criar tabela de clientes
     db.run(
       `CREATE TABLE IF NOT EXISTS customers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -16,11 +17,21 @@ const db = new sqlite3.Database(dbPath, (err) => {
         age INTEGER NOT NULL
       )`,
       (err) => {
-        if (err) {
-          console.error('Error creating table', err);
-        } else {
-          console.log('Table customers is ready');
-        }
+        if (err) console.error('Error creating customers table', err);
+        else console.log('Table customers is ready');
+      }
+    );
+
+    // Criar tabela de usuários
+    db.run(
+      `CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL
+      )`,
+      (err) => {
+        if (err) console.error('Error creating users table', err);
+        else console.log('Table users is ready');
       }
     );
   }
